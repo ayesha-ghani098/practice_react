@@ -1,7 +1,8 @@
 import './App.css';
 import React, {Component} from 'react';
-import Header2 from './components/header2';
+import {Header2, Logo} from './components/header2';
 import BasicTextFields from './components/textfield';
+
 
 
 // class App extends Component{
@@ -22,21 +23,21 @@ import BasicTextFields from './components/textfield';
 //   }
 // }
 
-class App extends Component{
-  render(){
-    return(
-      <div>
-        <img width="100" src="" alt=""/>
-         <Header />
-         <Header2 />
-         <BasicTextFields />
-         <h1>Main Component</h1>
-         <button type="button" className="btn btn-primary">Primary</button>
-         <Footer />
-      </div>
-    )
-  }
-}
+// class App extends Component{
+//   render(){
+//     return(
+//       <div>
+//          <Header2 name={this.state.name} page="Application Page"/>
+//          <Logo />
+//          <BasicTextFields />
+//          <h1>Main Component</h1>
+//          <button type="button" className="btn btn-primary">Primary</button>
+//          <Footer />
+        
+//       </div>
+//     )
+//   }
+// }
 
 class Header extends Component{
   render(){
@@ -64,5 +65,50 @@ class Footer extends Component{
 //     <div>Hello World</div>
 //   )
 // }
+
+class App extends Component {
+  constructor(){
+    super();
+   this.state={
+     name: "Ayesha Ghani",
+     email: "ayesha@gmail.com",
+     value: ""
+   }
+   this.set_name = this.set_name.bind(this); 
+  }
+
+  set_name(){
+this.setState({
+  name: this.state.value
+})
+}
+  get_name = () =>{
+console.log(this.state.name);
+  }
+
+get_props = (props) => {
+
+}
+
+  handlechange = (e) =>{
+   this.setState({
+     [e.target.name]: e.target.value
+   })
+  }
+  render(){
+    return(
+      <div>
+ <Header2 get_props={this.get_props} name={this.state.name} page="Application Page"/> 
+       <h2>{this.state.name}</h2>
+    <h2>{this.state.email}</h2>
+         {/* <input type="text" onChange={(e)=>console.log(this.setState({value: e.target.value}))} placeholder="enter your name" id="val"/> */}
+         <input name="name" onChange={(e)=> this.handlechange(e)} type="text"/>
+         <input name="email" onChange={(e)=> this.handlechange(e)} type="text"/>
+         <button onClick={this.set_name}>set name</button>
+         <button onClick={this.get_name}>get name</button>
+       </div>
+     )
+   }
+ }
 
 export default App;
